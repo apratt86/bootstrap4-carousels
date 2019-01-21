@@ -1,13 +1,6 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @link              https://www.apdevops.com
  * @since             1.0.0
  * @package           Bootstrap4_Carousels
@@ -15,12 +8,10 @@
  * @wordpress-plugin
  * Plugin Name:       Bootstrap 4 Carousels
  * Plugin URI:        https://github.com/apratt86/bootstrap4-carousels
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This plugin requires Bootstrap 4 to be loaded in your theme and Metabox plugin and Extensions.
  * Version:           1.0.0
  * Author:            Aaron Pratt
  * Author URI:        https://www.apdevops.com
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       bootstrap4-carousels
  * Domain Path:       /languages
  */
@@ -75,6 +66,13 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-bootstrap4-carousels.php';
  */
 function run_bootstrap4_carousels() {
 
+	$adminReqPartials = array(
+		'bs4-carousel-admin-menu.php',
+		'bs4-carousel-cpts.php',
+	);
+	foreach ( $adminReqPartials as $adminReqFile ){
+		require_once plugin_dir_path(__FILE__) . "admin/partials/{$adminReqFile}";
+	}
 	$plugin = new Bootstrap4_Carousels();
 	$plugin->run();
 
