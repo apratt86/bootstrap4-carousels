@@ -69,10 +69,20 @@ function run_bootstrap4_carousels() {
 	$adminReqPartials = array(
 		'bs4-carousel-admin-menu.php',
 		'bs4-carousel-cpts.php',
+		'bs4-carousel-options-page.php',
 	);
 	foreach ( $adminReqPartials as $adminReqFile ){
 		require_once plugin_dir_path(__FILE__) . "admin/partials/{$adminReqFile}";
 	}
+
+	$publicReqPartials = array(
+		'bs4-carousel-shortcode.php'
+	);
+
+	foreach ( $publicReqPartials as $publicReqFile ){
+		require_once plugin_dir_path(__FILE__) . "public/partials/{$publicReqFile}";
+	}
+
 	$plugin = new Bootstrap4_Carousels();
 	$plugin->run();
 
