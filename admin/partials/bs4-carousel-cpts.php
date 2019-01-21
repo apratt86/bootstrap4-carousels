@@ -54,6 +54,16 @@ function bs4_carousel_add_metaboxes( $meta_boxes ) {
                         'on_label' => 'Yes',
                         'off_label' => 'No',
                     ),
+                    array(
+                        'id' => 'tran_type',
+                        'name' => 'Select transition type',
+                        'type' => 'select',
+                        'placeholder' => 'Select type...',
+                        'options' => array(
+                            'slide' => 'Slide',
+                            'fade' => 'Fade',
+                        ),
+                    ),
                 ),
             ),
             array(

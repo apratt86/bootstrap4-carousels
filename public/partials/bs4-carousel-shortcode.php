@@ -37,6 +37,7 @@ function output_bs4_carousel( $atts ) {
 			$arrows_enabled = ( isset( $slider_gen_settings['arrows'] ) && $slider_gen_settings['arrows'] == 1 ) ? true : false;
 			$nav_enabled = ( isset( $slider_gen_settings['nav'] ) && $slider_gen_settings['nav'] == 1 ) ? true : false;
 			$hide_mobile = ( isset( $slider_gen_settings['hide_mobile'] ) && $slider_gen_settings['hide_mobile'] == 1 ) ? " d-none d-md-block" : false;
+			$transition = ( isset( $slider_gen_settings['tran_type'] ) && $slider_gen_settings['tran_type'] == 'fade' ) ? " carousel-fade" : '';
 
 			// Arrows Output:
 			if ( $arrows_enabled ) {
@@ -55,14 +56,17 @@ function output_bs4_carousel( $atts ) {
 			}
 
 			// Slider Container - Start:
-			$sliderBefore = "<div id='{$slider_name}' class='carousel slide{$hide_mobile}' data-ride='carousel'>";
+			$sliderBefore = 
+			"<!-- Yeah dawg, this slider is the result of a plugin I developed just for my custom Understrap Child Theme. If you're interested in using it. Hit the contact me page. -->
+			<div id='{$slider_name}' class='carousel slide{$transition}{$hide_mobile}' data-ride='carousel'>";
 
 		# Foreach Slider Content:
 
 			// Slider Inner Content Start:
 			$sliderInnerContent_start = "<div class='carousel-inner'>";
-			// Contents Empty Variable to Append Output to.
+			// Contents Empty Variables to Append Output to.
 			$slider_nav_indicators = '';
+			$slidesOutput = '';
 
 			foreach ( $slider_content as $slideIndex => $slideContent ) {
 				// First Slide Active Variable:
@@ -80,36 +84,16 @@ function output_bs4_carousel( $atts ) {
 				$slideImage = ( !empty( $imageID ) ) ? wp_get_attachment_image( $imageID, 'full', false, array( 'class' => "d-block w-100{$disable_lazyload}" ) ) : '';
 				// Orientation Variables:
 				$orientation = ( isset( $slideContent['orientation'] ) && !empty( $slideContent['orientation'] ) ) ? $slideContent['orientation'] : '';
-				if ( !empty( $orientation ) && $orientation == 'top-left' ) {
-					$orientation_class = "align-items-start justify-content-start";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'top-center' ) {
-					$orientation_class = "align-items-center justify-content-start";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'top-right' ) {
-					$orientation_class = "align-items-end justify-content-start";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'center-left' ) {
-					$orientation_class = "align-items-start justify-content-center";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'centered' ) {
-					$orientation_class = "align-items-center justify-content-center";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'center-right' ) {
-					$orientation_class = "align-items-end justify-content-center";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'bottom-left' ) {
-					$orientation_class = "align-items-start justify-content-end";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'bottom-center' ) {
-					$orientation_class = "align-items-center justify-content-end";
-				}
-				else if ( !empty( $orientation ) && $orientation == 'bottom-right' ) {
-					$orientation_class = "align-items-end justify-content-end";
-				}
-				else {
-					$orientation_class = "align-items-center justify-content-center";
-				}
+				if ( !empty( $orientation ) && $orientation == 'top-left' ) { $orientation_class = "align-items-start justify-content-start"; }
+				else if ( !empty( $orientation ) && $orientation == 'top-center' ) { $orientation_class = "align-items-center justify-content-start"; }
+				else if ( !empty( $orientation ) && $orientation == 'top-right' ) { $orientation_class = "align-items-end justify-content-start"; }
+				else if ( !empty( $orientation ) && $orientation == 'center-left' ) { $orientation_class = "align-items-start justify-content-center"; }
+				else if ( !empty( $orientation ) && $orientation == 'centered' ) { $orientation_class = "align-items-center justify-content-center"; }
+				else if ( !empty( $orientation ) && $orientation == 'center-right' ) { $orientation_class = "align-items-end justify-content-center"; }
+				else if ( !empty( $orientation ) && $orientation == 'bottom-left' ) { $orientation_class = "align-items-start justify-content-end"; }
+				else if ( !empty( $orientation ) && $orientation == 'bottom-center' ) { $orientation_class = "align-items-center justify-content-end"; }
+				else if ( !empty( $orientation ) && $orientation == 'bottom-right' ) { $orientation_class = "align-items-end justify-content-end"; }
+				else { $orientation_class = "align-items-center justify-content-center"; }
 
 				// Content Variables:
 				$heading = ( isset( $slideContent['slide_heading'] ) && !empty( $slideContent['slide_heading'] ) ) ? $slideContent['slide_heading'] : '';
