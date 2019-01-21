@@ -47,6 +47,13 @@ function bs4_carousel_add_metaboxes( $meta_boxes ) {
                         'on_label' => 'Yes',
                         'off_label' => 'No',
                     ),
+                    array(
+                        'id' => 'hide_mobile',
+                        'name' => 'Hide slider on mobile?',
+                        'type' => 'switch',
+                        'on_label' => 'Yes',
+                        'off_label' => 'No',
+                    ),
                 ),
             ),
             array(

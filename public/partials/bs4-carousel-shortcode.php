@@ -36,6 +36,7 @@ function output_bs4_carousel( $atts ) {
 			// Slider Output Boolean Variable Settings:
 			$arrows_enabled = ( isset( $slider_gen_settings['arrows'] ) && $slider_gen_settings['arrows'] == 1 ) ? true : false;
 			$nav_enabled = ( isset( $slider_gen_settings['nav'] ) && $slider_gen_settings['nav'] == 1 ) ? true : false;
+			$hide_mobile = ( isset( $slider_gen_settings['hide_mobile'] ) && $slider_gen_settings['hide_mobile'] == 1 ) ? " d-none d-md-block" : false;
 
 			// Arrows Output:
 			if ( $arrows_enabled ) {
@@ -54,7 +55,7 @@ function output_bs4_carousel( $atts ) {
 			}
 
 			// Slider Container - Start:
-			$sliderBefore = "<div id='{$slider_name}' class='carousel slide' data-ride='carousel'>";
+			$sliderBefore = "<div id='{$slider_name}' class='carousel slide{$hide_mobile}' data-ride='carousel'>";
 
 		# Foreach Slider Content:
 
@@ -76,7 +77,7 @@ function output_bs4_carousel( $atts ) {
 			# Slide Variables:
 				// Image Variables:
 				$imageID = ( isset( $slideContent['slide_image'] ) && !empty( $slideContent['slide_image'] ) ) ? $slideContent['slide_image'] : '';
-				$slideImage = ( !empty( $imageID ) ) ? wp_get_attachment_image( $imageID, 'full', false, array( 'class' => "d-block w-100{$$disable_lazyload}" ) ) : '';
+				$slideImage = ( !empty( $imageID ) ) ? wp_get_attachment_image( $imageID, 'full', false, array( 'class' => "d-block w-100{$disable_lazyload}" ) ) : '';
 				// Orientation Variables:
 				$orientation = ( isset( $slideContent['orientation'] ) && !empty( $slideContent['orientation'] ) ) ? $slideContent['orientation'] : '';
 				if ( !empty( $orientation ) && $orientation == 'top-left' ) {
@@ -112,7 +113,9 @@ function output_bs4_carousel( $atts ) {
 
 				// Content Variables:
 				$heading = ( isset( $slideContent['slide_heading'] ) && !empty( $slideContent['slide_heading'] ) ) ? $slideContent['slide_heading'] : '';
+				$heading_css = ( isset( $slideContent['heading_css'] ) && !empty( $slideContent['heading_css'] ) ) ? $slideContent['heading_css'] : '';
 				$subheading = ( isset( $slideContent['slide_subheading'] ) && !empty( $slideContent['slide_subheading'] ) ) ? $slideContent['slide_subheading'] : '';
+				$subheading_css = ( isset( $slideContent['subheading_css'] ) && !empty( $slideContent['subheading_css'] ) ) ? $slideContent['subheading_css'] : '';
 				$content = ( isset( $slideContent['slide_content'] ) && !empty( $slideContent['slide_content'] ) ) ? $slideContent['slide_content'] : '';
 				// Link Variables:
 				$link_type = ( isset( $slideContent['link_type'] ) && !empty( $slideContent['link_type'] ) ) ? $slideContent['link_type'] : '';
@@ -153,13 +156,14 @@ function output_bs4_carousel( $atts ) {
 				// Compile the Overlay Content:
 				if ( !empty( $heading ) || !empty( $subheading ) || !empty( $content ) || $link_type == 'button' ) {
 					$slidesOutput .= "<div class='carousel-caption h-100 d-flex flex-column pt-5 px-3 {$orientation_class}'>";
-					$slidesOutput .= ( !empty( $heading ) ) ? "<h2>{$heading}</h2>" : '';
-					$slidesOutput .= ( !empty( $subheading ) ) ? "<h3>{$subheading}</h3>" : '';
+					$slidesOutput .= ( !empty( $heading ) ) ? "<h2 class='{$heading_css}'>{$heading}</h2>" : '';
+					$slidesOutput .= ( !empty( $subheading ) ) ? "<h3 class='{$subheading_css}'>{$subheading}</h3>" : '';
 					$slidesOutput .= ( !empty( $content ) ) ? "<p>{$content}</p>" : '';
 					// $slidesOutput .= ( !empty( $ ) ) ? "{$}" : '';
-					$slidesOutput .= $linkStart . $linkEnd;
+					$slidesOutput .= ( $link_type == 'button' ) ? $linkStart . $linkEnd : '';
 					$slidesOutput .= "</div>";
 				}
+
 				// Whole Image Link Condition End:
 				if ( $link_type == 'image' ) {
 					$slidesOutput .= $linkEnd;
