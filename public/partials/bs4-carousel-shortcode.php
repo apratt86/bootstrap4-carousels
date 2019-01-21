@@ -4,14 +4,14 @@ function output_bs4_carousel( $atts ) {
 	// Shortcode Attributes Inputs:
     $atts = shortcode_atts(
 		array(
-			'carousel_name' => false,
+			'name' => false,
 		), 
 		$atts,
 		'bs4_carousel'
 	);
 
 	// Shortcode Attribute Input Variables:
-	$slider_name = ( $atts['carousel_name'] !== false ) ? $atts['carousel_name'] : false;
+	$slider_name = ( $atts['name'] !== false ) ? $atts['name'] : false;
 
 	// Global Plugin Variable Options:
 	$bs4c_global_options = get_option( 'bs4c_options_page' );
