@@ -158,8 +158,7 @@ function output_bs4_carousel( $atts ) {
 					$slidesOutput .= "<div class='carousel-caption h-100 d-flex flex-column pt-5 px-3 {$orientation_class}'>";
 					$slidesOutput .= ( !empty( $heading ) ) ? "<h2 class='{$heading_css}'>{$heading}</h2>" : '';
 					$slidesOutput .= ( !empty( $subheading ) ) ? "<h3 class='{$subheading_css}'>{$subheading}</h3>" : '';
-					$slidesOutput .= ( !empty( $content ) ) ? "<p>{$content}</p>" : '';
-					// $slidesOutput .= ( !empty( $ ) ) ? "{$}" : '';
+					$slidesOutput .= ( !empty( $content ) ) ? "<div>{$content}</div>" : '';
 					$slidesOutput .= ( $link_type == 'button' ) ? $linkStart . $linkEnd : '';
 					$slidesOutput .= "</div>";
 				}
