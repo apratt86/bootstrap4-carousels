@@ -122,6 +122,11 @@ class Bootstrap4_Carousels {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bootstrap4-carousels-public.php';
 
+		/**
+		 * The class responsible for dependencies
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tgm-plugin-activation.php';
+
 		$this->loader = new Bootstrap4_Carousels_Loader();
 
 	}

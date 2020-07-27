@@ -55,6 +55,57 @@ register_deactivation_hook( __FILE__, 'deactivate_bootstrap4_carousels' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-bootstrap4-carousels.php';
 
+
+add_action( 'tgmpa_register', 'bs4c_register_required_plugins' );
+
+function bs4c_register_required_plugins() {
+	$plugins = [
+		[
+			'name'      => 'Meta Box',
+			'slug'      => 'meta-box',
+			'required'  => false,
+		],
+		[
+			'name' => 'Meta Box - Tabs',
+			'slug' => 'meta-box-tabs',
+			'source' => plugin_dir_path( __FILE__ ) . 'libs/meta-box-tabs.zip',
+			'required' => true,
+		],
+		[
+			'name' => 'Meta Box - Group',
+			'slug' => 'meta-box-group',
+			'source' => plugin_dir_path( __FILE__ ) . 'libs/meta-box-group.zip',
+			'required' => true,
+		],
+		[
+			'name' => 'Meta Box - Conditional Logic',
+			'slug' => 'meta-box-conditional-logic',
+			'source' => plugin_dir_path( __FILE__ ) . 'libs/meta-box-conditional-logic.zip',
+			'required' => true,
+		],
+		[
+			'name' => 'Meta Box - Settings Page',
+			'slug' => 'mb-settings-page',
+			'source' => plugin_dir_path( __FILE__ ) . 'libs/mb-settings-page.zip',
+			'required' => true,
+		],
+	];
+	$config = array(
+		'id'           => 'bootstrap4-carousels',
+		'default_path' => '',
+		'menu'         => 'bs4_carousels',
+		'parent_slug'  => 'bs4_carousels',
+		'capability'   => 'edit_posts',
+		'has_notices'  => true,
+		'dismissable'  => true,
+		'dismiss_msg'  => '',
+		'is_automatic' => false,
+		'message'      => '',
+	);
+
+	tgmpa( $plugins, $config );
+}
+
 /**
  * Begins execution of the plugin.
  *
