@@ -10,6 +10,9 @@ function output_bs4_carousel( $atts ) {
 		'bs4_carousel'
 	);
 
+	wp_enqueue_script( 'popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ), '1.16.0', false );
+	wp_enqueue_script( 'bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js', array( 'jquery' ), '4.5.0', false );
+
 	// Shortcode Attribute Input Variables:
 	$slider_name = ( $atts['name'] !== false ) ? $atts['name'] : false;
 
